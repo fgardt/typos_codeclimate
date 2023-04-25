@@ -46,7 +46,10 @@ impl From<TypoIssue> for CodeClimateIssue {
             false => Severity::Info,
         };
 
-        let description = format!("Found a typo: '{}'. Did you mean '{}'?", source.typo, source.fix);
+        let description = format!(
+            "Found a typo: '{}'. Did you mean '{}'?",
+            source.typo, source.fix
+        );
         let fingerprint = format!("{:x}", md5::compute(source.raw));
         let path = source.file;
         let line = source.line;

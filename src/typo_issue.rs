@@ -26,14 +26,14 @@ impl TryFrom<String> for TypoIssue {
         if !re.is_match(value.as_str()) {
             return Err(ConvertError::InvalidFormatError);
         }
-        
+
         let groups = re.captures(value.as_str()).unwrap();
 
         let file = groups.get(1).unwrap().as_str().to_owned();
         let line = groups.get(2).unwrap().as_str().parse::<u32>().unwrap();
         let column = match groups.get(3) {
             Some(matching) => matching.as_str().parse::<u32>().unwrap(),
-            None => 0
+            None => 0,
         };
         let typo = groups.get(4).unwrap().as_str().to_owned();
         let fix = groups.get(5).unwrap().as_str().to_owned();
